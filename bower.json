@@ -1,0 +1,23 @@
+{
+  "name": "mongoose-form",
+  "version": "1.0.0",
+  "homepage": "https://github.com/desaurabh/mongoose-form",
+  "authors": [
+    "Saurabh kumar <desaurabh@live.com>"
+  ],
+  "description": "Generates HTML forms & creates JS data model by learning mongoose schema",
+  "main": "index.js",
+  "keywords": [
+    "mongoose",
+    "forms",
+    "generator",
+    "dynamic-forms",
+    "material",
+    "UI",
+    "forms",
+    "model"
+  ],
+  "license": "MIT",
+  "private": true
+
+}

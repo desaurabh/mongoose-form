@@ -95,6 +95,7 @@ function FormBuilder(formInstance){
     SchemaMarshaller.call(this, formInstance);
 }
 
+
 FormBuilder.prototype=Object.create(SchemaMarshaller.prototype);
 FormBuilder.prototype.constructor=FormBuilder;
 

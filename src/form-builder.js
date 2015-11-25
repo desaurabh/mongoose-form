@@ -96,7 +96,16 @@ Form.prototype.createInputContainer=function(className){
 };
 
 function MaterialForm(schema,schemaName){
-    Form.call(this, schema[schemaName], schemaName);
+    this.initialized=false;
+    if(typeof(schema)==='object' && typeof(schemaName)==='string'){
+	    Form.call(this,
+		      schema.hasOwnProperty(schemaName) ?
+		      schema[schemaName] : schema,
+		      schemaName
+		     );
+	this.initialized=true;
+	
+    }
 }
 
 MaterialForm.prototype=Object.create(Form.prototype);
