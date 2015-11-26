@@ -2,6 +2,7 @@ function Form(schema, schemaName){
     this.form={};
     this.schema=schema;
     this.name=schemaName;
+    this.formName=new String();
     this.model={};
     this.default={
 	messages:{
@@ -42,7 +43,7 @@ Form.prototype.createNgMessageParent=function(parentName, elemRole){
     var parentAttr=document.createAttribute("ng-messages");
     var roleAttr=document.createAttribute("role");
                 roleAttr.value=typeof(elemRole)!=='undefined' ? elemRole : "alert";
-                parentAttr.value=parentName;
+                parentAttr.value=this.formName+"."+parentName+".$error";
     parentElement.setAttributeNode(parentAttr);
                 parentElement.setAttributeNode(roleAttr);
     return parentElement;
@@ -50,10 +51,12 @@ Form.prototype.createNgMessageParent=function(parentName, elemRole){
 
 Form.prototype.createForm=function(fName){
     var form;
-    if(typeof(fName)!=='undefined'){
+    if(typeof(this.name)!=='undefined'){
+	this.formName=typeof(fName)==='string' ?
+	    fName+"Form":this.name + "Form";
         form=document.createElement("form");
 	var formName=document.createAttribute("name");
-	formName.value=fName;
+	formName.value=this.formName;
 	form.setAttributeNode(formName);
     }
     return form;
@@ -66,7 +69,7 @@ Form.prototype.createInputField=function(validationAttr, name, label, path){
 	var nameAttr=document.createAttribute("name");
 	nameAttr.value=name;
 	var pathAttr=document.createAttribute("ng-model");
-	pathAttr.value=path;
+	pathAttr.value=this.name+"."+path;
 	parentInputField.setAttributeNode(pathAttr);
 	parentInputField.setAttributeNode(nameAttr);
 	for(var attr in validationAttr){

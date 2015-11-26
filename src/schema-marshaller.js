@@ -5,6 +5,9 @@ function SchemaMarshaller(formInstance){
     this.isObject=function(obj){
 	return typeof(obj)==='object';
     };
+    this.objectIsNotEmpty=function(obj){
+	return Object.keys(obj).length>0;
+    };
     this.dataType=function(dType){
 	var value;
 	if(this.isAcceptable(dType)){
@@ -39,7 +42,7 @@ function SchemaMarshaller(formInstance){
 }
 SchemaMarshaller.prototype.marshallValidators=function(validatorObj){
     var domValidator, validationTypes=[];
-	if(this.isAcceptable(validatorObj)){
+    if(this.isAcceptable(validatorObj)){
 	    domValidator=this.mForm.createNgMessageParent();
 	    for(var obj in validatorObj){
 		if(this.isObject(validatorObj[obj]))
@@ -54,7 +57,6 @@ SchemaMarshaller.prototype.marshallValidators=function(validatorObj){
 				name:type,
 				value:validatorObj[obj][prop][type]
 			    });
-
 			}
 		    }
 
@@ -69,9 +71,8 @@ SchemaMarshaller.prototype.marshallValidators=function(validatorObj){
 SchemaMarshaller.prototype.marshallSchema=function(){
     var schema=this.mForm.schema;
     if(this.isObject(schema)){
-	this.mForm.form=this.mForm.createForm(this.mForm.name);
+	this.mForm.form=this.mForm.createForm();
 	for(var property in schema){
-	    console.log(schema[property].instance);
 	    this.mForm.model[property]=this.dataType(schema[property].instance);
 	    var validations=this.marshallValidators(schema[property]);
 	    var label=this.mForm.createInputFieldLabel(property);
