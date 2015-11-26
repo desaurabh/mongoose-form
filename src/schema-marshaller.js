@@ -42,7 +42,8 @@ function SchemaMarshaller(formInstance){
 }
 SchemaMarshaller.prototype.marshallValidators=function(validatorObj){
     var domValidator, validationTypes=[];
-    if(this.isAcceptable(validatorObj)){
+    if(this.isAcceptable(validatorObj) &&
+       this.objectIsNotEmpty(validatorObj.validators)){
 	    domValidator=this.mForm.createNgMessageParent();
 	    for(var obj in validatorObj){
 		if(this.isObject(validatorObj[obj]))
