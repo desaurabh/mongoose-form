@@ -75,7 +75,8 @@ Form.prototype.createForm=function(fName){
 };
 
 Form.prototype.createInputField=function(validations, name, label, path){
-    var parentInputField, validationAttr=validations.valiationAttr;
+    var parentInputField, validationAttr=typeof(validations)!=='undefined' ?
+	    validations.validationAttr : undefined;
     parentInputField=document.createElement("input");
     var nameAttr=document.createAttribute("name");
     nameAttr.value=name;
