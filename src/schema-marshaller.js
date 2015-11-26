@@ -82,7 +82,7 @@ SchemaMarshaller.prototype.marshallSchema=function(){
 	    var validations=this.marshallValidators(schema[property]);
 	    var label=this.mForm.createInputFieldLabel(property);
 	    var inputField=this.mForm.createInputField(
-		validations.validationTypes,
+		validations,
 		property,
 		property,
 		property

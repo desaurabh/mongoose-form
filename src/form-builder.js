@@ -62,7 +62,7 @@ Form.prototype.createForm=function(fName){
     return form;
 };
 
-Form.prototype.createInputField=function(validationAttr, name, label, path){
+Form.prototype.createInputField=function(validations, name, label, path){
     var parentInputField;
     parentInputField=document.createElement("input");
     var nameAttr=document.createAttribute("name");
@@ -71,8 +71,8 @@ Form.prototype.createInputField=function(validationAttr, name, label, path){
     pathAttr.value=this.name+"."+path;
     parentInputField.setAttributeNode(pathAttr);
     parentInputField.setAttributeNode(nameAttr);
-    if(typeof(validationAttr)!=='undefined'){
-	for(var attr in validationAttr){
+    if(typeof(validations)!=='undefined'){
+	for(var attr in validations.validationAttr){
 	    var valAttr=document.createAttribute(validationAttr[attr].type);
 	    valAttr.value=validationAttr[attr].value;
 	    parentInputField.setAttributeNode(valAttr);
