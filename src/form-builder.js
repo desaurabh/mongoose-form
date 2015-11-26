@@ -23,6 +23,18 @@ function Form(schema, schemaName){
 	    maxlength:"ng-maxlength"
 	}
     };
+    this.inputType=function(value){
+	switch(value){
+	case "string":
+	    return "text";
+	case "number":
+	    return "number";
+	case "boolean":
+	    return "checkbox";
+	default:
+	    return "text";
+	}
+    };
 
 }
 
@@ -63,16 +75,18 @@ Form.prototype.createForm=function(fName){
 };
 
 Form.prototype.createInputField=function(validations, name, label, path){
-    var parentInputField;
+    var parentInputField, validationAttr=validations.valiationAttr;
     parentInputField=document.createElement("input");
     var nameAttr=document.createAttribute("name");
     nameAttr.value=name;
     var pathAttr=document.createAttribute("ng-model");
     pathAttr.value=this.name+"."+path;
+    var type=document.createAttribute("type");
+    type.value=this.inputType(typeof(this.model[path]));
     parentInputField.setAttributeNode(pathAttr);
     parentInputField.setAttributeNode(nameAttr);
     if(typeof(validations)!=='undefined'){
-	for(var attr in validations.validationAttr){
+	for(var attr in validationAttr){
 	    var valAttr=document.createAttribute(validationAttr[attr].type);
 	    valAttr.value=validationAttr[attr].value;
 	    parentInputField.setAttributeNode(valAttr);
