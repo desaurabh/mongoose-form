@@ -64,14 +64,14 @@ Form.prototype.createForm=function(fName){
 
 Form.prototype.createInputField=function(validationAttr, name, label, path){
     var parentInputField;
+    parentInputField=document.createElement("input");
+    var nameAttr=document.createAttribute("name");
+    nameAttr.value=name;
+    var pathAttr=document.createAttribute("ng-model");
+    pathAttr.value=this.name+"."+path;
+    parentInputField.setAttributeNode(pathAttr);
+    parentInputField.setAttributeNode(nameAttr);
     if(typeof(validationAttr)!=='undefined'){
-	parentInputField=document.createElement("input");
-	var nameAttr=document.createAttribute("name");
-	nameAttr.value=name;
-	var pathAttr=document.createAttribute("ng-model");
-	pathAttr.value=this.name+"."+path;
-	parentInputField.setAttributeNode(pathAttr);
-	parentInputField.setAttributeNode(nameAttr);
 	for(var attr in validationAttr){
 	    var valAttr=document.createAttribute(validationAttr[attr].type);
 	    valAttr.value=validationAttr[attr].value;
