@@ -62,11 +62,15 @@ SchemaMarshaller.prototype.marshallValidators=function(validatorObj){
 		    }
 
 	    }
-	}
-    return {
-	domValidator:domValidator,
-	validationTypes:validationTypes
-    };
+	return {
+	    domValidator:domValidator,
+	    validationTypes:validationTypes
+	};
+	
+    }
+    else
+	return undefined;
+
 };
 
 SchemaMarshaller.prototype.marshallSchema=function(){
@@ -86,7 +90,8 @@ SchemaMarshaller.prototype.marshallSchema=function(){
 	    var container=this.mForm.createInputContainer();
 	    container.appendChild(label);
 	    container.appendChild(inputField);
-	    container.appendChild(validations.domValidator);
+	    if(typeof(validations)!=='undefined')
+		container.appendChild(validations.domValidator);
 	    this.mForm.form.appendChild(container);
 	}
 	
